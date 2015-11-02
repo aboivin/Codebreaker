@@ -21,6 +21,9 @@ When the game starts the player should be able to guess the secret code by provi
 * Secret: `2234`, Proposal: `2234` ⇒ Response: `++++`
 
 # Play the game
+
+Requires : mavan (2+), java 8
+
 * mvn clean package
 * java -jar target/codebreaker-1.0-SNAPSHOT.jar
 
