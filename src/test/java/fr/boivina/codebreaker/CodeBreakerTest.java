@@ -10,8 +10,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CodeBreakerTest {
 
     private void checkCodeBreakerOutputGivenSecretAndGuessedCode(String secretCode, String guessedCode, String output) {
+
+        // Given
         CodeBreaker codeBreaker = new CodeBreaker(secretCode);
+
+        // When
         String result = codeBreaker.guessSecretCode(guessedCode);
+
+        // Then
         assertThat(result).isEqualTo(output);
     }
 
@@ -62,9 +68,15 @@ public class CodeBreakerTest {
 
     @Test
     public void multipleGuess() {
+
+        // Given
         CodeBreaker codeBreaker = new CodeBreaker("2234");
+
+        // When
         codeBreaker.guessSecretCode("1234");
         String result = codeBreaker.guessSecretCode("2234");
+
+        // Then
         assertThat(result).isEqualTo("++++");
     }
 }

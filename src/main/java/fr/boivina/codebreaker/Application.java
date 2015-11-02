@@ -2,6 +2,7 @@ package fr.boivina.codebreaker;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Application {
@@ -10,7 +11,7 @@ public class Application {
 
     private CodeBreaker codeBreaker;
 
-    private CodeGenerator codeGenerator = new CodeGenerator();
+    private CodeGenerator codeGenerator = new CodeGenerator(new Random());
 
     public static void main(String[] args) {
         Application app = new Application();

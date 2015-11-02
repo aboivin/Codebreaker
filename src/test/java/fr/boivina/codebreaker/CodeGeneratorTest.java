@@ -3,20 +3,47 @@ package fr.boivina.codebreaker;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(JUnit4.class)
+@RunWith(MockitoJUnitRunner.class)
 public class CodeGeneratorTest {
 
-    @Test
-    public void generateRandomSecretNumber() {
+    public static final int MAX_CODE = 9999;
+    public static final int CODE_LENGTH = 4;
 
-        CodeGenerator codeGenerator = new CodeGenerator();
-        String result = codeGenerator.generateCode(4);
-        System.out.println(result);
-        assertThat(result).hasSize(4);
-        assertThat(NumberUtils.isNumber(result)).isTrue();
+    @InjectMocks
+    private CodeGenerator codeGenerator;
+
+    @Mock
+    private Random random;
+
+    private void checkGeneratedNumberIsValid(int randomNumber, String expected) {
+
+        // Given
+        Mockito.when(this.random.nextInt(MAX_CODE)).thenReturn(randomNumber);
+
+        // When
+        String result = codeGenerator.generateCode(CODE_LENGTH);
+
+        // Then
+        Mockito.verify(random, Mockito.times(1)).nextInt(9999);
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    public void generateNominalCase() {
+        checkGeneratedNumberIsValid(1234, "1234");
+    }
+
+    @Test
+    public void generateZero() {
+        checkGeneratedNumberIsValid(0, "0000");
     }
 }
