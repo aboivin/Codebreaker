@@ -22,7 +22,7 @@ When the game starts the player should be able to guess the secret code by provi
 
 # Play the game
 
-Requires : mavan (2+), java 8
+Requires : maven (2+), java 8
 
 * mvn clean package
 * java -jar target/codebreaker-1.0-SNAPSHOT.jar
